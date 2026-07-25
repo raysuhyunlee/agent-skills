@@ -29,17 +29,7 @@ Read only the context needed for the scope:
 
 Build the complete source-string set before translating. Preserve identifiers, interpolation tokens, markup, escape sequences, line breaks, and intentional whitespace.
 
-## 3. Localize by language
-
-Use one subagent per target language when subagents are available. Give each subagent:
-
-- the target locale and regional variant
-- the source strings
-- concise product and domain context
-- terminology from that locale's existing content
-- format constraints and the exact target files
-
-Assign non-overlapping target files. When languages share one file, have subagents return translations and let the primary agent apply them to avoid conflicting writes. Do not give one language's draft to another language's subagent.
+## 3. Localize
 
 For every locale:
 

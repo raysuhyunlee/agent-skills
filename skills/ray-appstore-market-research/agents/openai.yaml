@@ -1,0 +1,4 @@
+interface:
+  display_name: "App Store Market Research"
+  short_description: "Keyword, competitor, review, and customer analysis"
+  default_prompt: "Use $ray-appstore-market-research to research a target keyword, competing apps, reviews, and customer needs."

@@ -1,0 +1,14 @@
+"""
+프로젝트별 상수. 다른 레포에서는 이 파일만 수정하면 됩니다.
+"""
+
+# Android
+ANDROID_PACKAGE_NAME = ""
+ANDROID_SERVICE_ACCOUNT_PATH = ""
+ANDROID_IAP_PRODUCT_IDS = [""]
+ANDROID_SUBSCRIPTION_PRODUCT_IDS = [""]
+
+# iOS
+IOS_IAP_ID = ""
+IOS_IAP_PRODUCT_IDS = [""]
+IOS_SUBSCRIPTION_GROUP_ID = ""

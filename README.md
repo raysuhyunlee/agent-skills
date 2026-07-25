@@ -7,6 +7,8 @@ Personal agent skills managed as source files and installed with individual syml
 - `ray-init-project-specs`: initialize `AGENTS.md`, `README.md`, and `spec/`
 - `ray-localize`: localize project content across supported locales
 - `ray-quality-and-spec-check`: review code quality and spec compliance
+- `ray-appstore-market-research`: research app keywords, competitors, reviews, and customer needs
+- `ray-production-launch-checklist`: production-release checklist workflow, including launch-time AdMob SKAdNetwork ID sync
 
 ## Install
 
