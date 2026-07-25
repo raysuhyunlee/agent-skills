@@ -1,0 +1,4 @@
+interface:
+  display_name: "Store Screenshots"
+  short_description: "Localized captions and fastlane snapshot capture"
+  default_prompt: "Use $ray-store-screenshots to select store screenshot screens, write localized captions, and capture raw screenshots."
