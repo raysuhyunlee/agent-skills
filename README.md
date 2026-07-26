@@ -9,6 +9,7 @@ Personal agent skills managed as source files and installed with individual syml
 - `ray-quality-and-spec-check`: review code quality and spec compliance
 - `ray-appstore-market-research`: research app keywords, competitors, reviews, and customer needs
 - `ray-production-launch-checklist`: production-release checklist workflow, including launch-time AdMob SKAdNetwork ID sync
+- `ray-app-review-notes`: draft first-submission App Review notes and a physical-device demo recording plan
 - `ray-store-positioning`: derive and confirm shared core-value positioning for store assets
 - `ray-store-listing`: create ASO-backed store metadata with separate name and keyword approval gates
 - `ray-store-screenshots`: capture localized app screens and compose final store-ready PNGs with the pen.dev CLI

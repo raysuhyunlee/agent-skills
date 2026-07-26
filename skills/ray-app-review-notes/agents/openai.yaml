@@ -1,0 +1,4 @@
+interface:
+  display_name: "App Review Notes"
+  short_description: "Draft App Review notes and demo recording plans"
+  default_prompt: "Use $ray-app-review-notes to inspect this app and prepare concise App Review notes and a physical-device demo recording plan."
