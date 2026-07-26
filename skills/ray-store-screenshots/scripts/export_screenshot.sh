@@ -20,7 +20,7 @@ node_id="$1"
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 pen_file="$repo_root/design/screenshots/store-screenshots.pen"
 final_root="$repo_root/design/screenshots/final"
-export_scale=3
+export_scale=1
 
 for command_name in pen perl base64 pngcrush sips; do
   command -v "$command_name" >/dev/null || {

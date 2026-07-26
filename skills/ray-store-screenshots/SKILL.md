@@ -26,7 +26,7 @@ The helper accepts one top-level Pen node ID:
 ./tools/export_screenshot.sh <pen-node-id>
 ```
 
-It resolves a frame named `<locale>/<device>/NN-screen-name`, exports it at 3×,
+It resolves a frame named `<locale>/<device>/NN-screen-name`, exports it at 1×,
 writes `final/<locale>/<device>/NN_screen-name.png`, removes the alpha channel, and
 validates the rendered dimensions. Keep this naming contract when building frames.
 
@@ -240,7 +240,7 @@ Export each top-level frame through the installed helper:
 ```
 
 Run it once per approved top-level frame. The helper uses Pen `export_nodes`, PNG
-format, and 3× scale, then places the result in `final/<locale>/<device>/` according
+format, and 1× scale, then places the result in `final/<locale>/<device>/` according
 to the frame name.
 
 Pen PNG exports include an alpha channel even when the top-level frame has a fully
