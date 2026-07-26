@@ -13,6 +13,23 @@ appropriate.
 Read [references/pen-composition.md](references/pen-composition.md) before proposing a
 visual direction or operating the Pen CLI.
 
+## Install the project export helper
+
+At the start of the first invocation in a project, ensure
+`tools/export_screenshot.sh` exists. If it is missing, create `tools/` when needed,
+copy [scripts/export_screenshot.sh](scripts/export_screenshot.sh) there, and make it
+executable. Do not overwrite a project-local copy unless the user requests an update.
+
+The helper accepts one top-level Pen node ID:
+
+```sh
+./tools/export_screenshot.sh <pen-node-id>
+```
+
+It resolves a frame named `<locale>/<device>/NN-screen-name`, exports it at 3×,
+writes `final/<locale>/<device>/NN_screen-name.png`, removes the alpha channel, and
+validates the rendered dimensions. Keep this naming contract when building frames.
+
 ## 1. Resolve the scope
 
 Inspect before asking:
@@ -216,17 +233,23 @@ Use `snapshot_layout({ problemsOnly: true })` to catch clipping and overflow. Us
 `get_screenshot` sparingly on completed top-level frames to inspect visual fidelity at
 full size and thumbnail scale.
 
-Export each top-level frame separately with Pen `export_nodes`, PNG format, and a scale
-that produces the exact required pixel dimensions. Put only approved production files
-in `final/<locale>/<device>/`.
+Export each top-level frame through the installed helper:
+
+```sh
+./tools/export_screenshot.sh <pen-node-id>
+```
+
+Run it once per approved top-level frame. The helper uses Pen `export_nodes`, PNG
+format, and 3× scale, then places the result in `final/<locale>/<device>/` according
+to the frame name.
 
 Pen PNG exports include an alpha channel even when the top-level frame has a fully
-opaque background. After export, remove only the alpha channel with Xcode's
-`pngcrush`, writing to a temporary file before replacing the export:
+opaque background. After export, remove only the alpha channel with `pngcrush`, 
+writing to a temporary file before replacing the export:
 
 ```sh
 tmp_png="$(mktemp).png"
-xcrun pngcrush -q -rem alla -reduce input.png "$tmp_png"
+pngcrush -q -rem alla -reduce input.png "$tmp_png"
 mv "$tmp_png" input.png
 sips -g hasAlpha input.png
 ```
@@ -234,6 +257,8 @@ sips -g hasAlpha input.png
 Require `hasAlpha: no` for every final PNG. This channel removal is an allowed
 technical normalization for store compatibility, not a visual correction. It must not
 resize, crop, stretch, repaint, or otherwise alter the rendered composition.
+
+Note: DO NOT USE pngcrush embedded into Xcode. It't old and has bugs.
 
 Verify:
 
