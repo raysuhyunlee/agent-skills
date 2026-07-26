@@ -1,0 +1,4 @@
+interface:
+  display_name: "Store Positioning"
+  short_description: "Shared core-value positioning for store assets"
+  default_prompt: "Use $ray-store-positioning to derive and confirm the shared positioning for my app store assets."

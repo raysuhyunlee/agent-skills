@@ -1,71 +1,95 @@
 ---
 name: ray-store-screenshots
-description: Plan and capture localized App Store screenshots with fastlane snapshot, covering core-value screen selection, two-line English caption copywriting, user confirmation, marketing transcreation into every supported locale, deterministic XCUITest capture, and versioned raw screenshot output. Use when the user asks to create, refresh, automate, localize, or caption store screenshots, App Store or Play Store listing images, or screenshot capture pipelines.
+description: Plan, capture, design, and export localized App Store screenshots from an approved shared store-positioning brief, using deterministic fastlane snapshot capture and the pen.dev CLI for editable .pen compositions and final store-ready PNGs. Includes core-value screen selection, two-line caption confirmation, app-specific visual-direction options with a separate user approval gate, locale-aware design, and exact-dimension validation. Use when creating, refreshing, automating, localizing, captioning, composing, or exporting App Store or Play Store listing screenshots.
 ---
 
 # Store Screenshots
 
-Produce raw store screenshots and the localized caption copy that goes on top of them. Capture iOS only, even when the product also ships on Android; the iOS assets are the single source for every store.
+Produce the complete screenshot set: approved copy, deterministic raw captures, an
+editable Pen source, and exact-size final PNGs. Capture the shipping iOS app even when
+the product also ships on Android; reuse those source captures for other stores when
+appropriate.
 
-Scope ends at raw screenshots plus confirmed captions. Compositing raw screenshots into final marketing images is handled by a separate tool and is out of this skill's scope.
+Read [references/pen-composition.md](references/pen-composition.md) before proposing a
+visual direction or operating the Pen CLI.
 
 ## 1. Resolve the scope
 
 Inspect before asking:
 
-- the shipping app target, not deprecated or reference implementations in the same repository
-- supported locales, from the app's own localization resources (`.lproj`, `.xcstrings`, `.arb`, catalogs), never from an assumed list
-- existing screenshot directories, caption files, and fastlane configuration
-- product specifications, design specifications, and market research already in the repository
+- the shipping app target, excluding deprecated or reference implementations
+- supported locales from `.lproj`, `.xcstrings`, `.arb`, or equivalent app resources
+- existing raw and final screenshots, captions, `.pen` files, and capture configuration
+- product, design, brand, icon, market, and positioning documents
+- app theme colors, typography, icon palette, UI appearance, and meaningful visual motifs
+- current store screenshot requirements for the resolved devices
 
-State the resolved app, locales, devices, and output paths before doing any work. Ask the user only when inspection leaves the scope genuinely ambiguous.
+State the app, locales, devices, appearance, and output paths before work. Ask only
+when inspection leaves the scope genuinely ambiguous.
 
-Default devices: one 6.9-inch iPhone. Add a 13-inch iPad only when the app declares iPad support. Do not capture device sizes the store no longer requires.
+Default to one current large iPhone size accepted by the target store. Add a large iPad
+only when the shipping app declares iPad support. Verify current requirements rather
+than relying on remembered dimensions.
 
-## 2. Follow the repository's layout
+## 2. Require approved positioning
 
-If the repository already has a screenshot layout, follow it exactly. Otherwise create:
+Verify that `design/store/positioning.md`, or the repository's equivalent:
+
+- has `status: approved`
+- matches the shipping product
+- contains the three ordered primary, differentiating, and proof values
+- defines supported evidence and claim boundaries
+
+If it is missing or stale, use `$ray-store-positioning` first when available. Otherwise
+follow that artifact contract, present the positioning for confirmation, and stop.
+Never create screenshot-only positioning.
+
+## 3. Follow the repository layout
+
+Follow an existing layout. Otherwise use:
 
 ```text
 design/screenshots/
-├── captions/<locale>.json    # caption copy, one file per locale
-├── raw/<locale>/<device>/    # fastlane snapshot output, committed
-└── final/<locale>/<device>/  # composited marketing images, committed
+├── captions/<locale>.json
+├── raw/<locale>/<device>/
+├── final/<locale>/<device>/
+├── direction.md
+└── store-screenshots.pen
 ```
 
-Both `raw/` and `final/` are version-controlled. Never add them to `.gitignore`. Keep fastlane's working output outside the repository or move it into `raw/` after each run, so the committed tree holds exactly one copy.
+Keep `raw/`, `final/`, `direction.md`, and the `.pen` source version-controlled. Keep
+temporary Pen previews outside `final/`. Name final images `NN_screen-name.png`, with
+the same index and meaning in every locale and device.
 
-Name files `NN_screen-name.png` with a fixed numeric order shared by every locale and device. The same index must always mean the same screen.
+## 4. Select exactly three screens
 
-## 3. Select the screens
+Map the approved values in order:
 
-Choose exactly three screens, ranked by the product's core value rather than by feature count:
+1. primary value: the single reason to download
+2. differentiating value: the strongest reason to choose this app
+3. proof value: the visible moment showing the outcome was achieved
 
-1. the single reason the product exists, shown in its most legible state
-2. the capability that most clearly separates it from substitutes
-3. the moment that proves the product works or pays off for the user
+For each screen record the value, source screen, required app state, visual focal point,
+and capture route. Prefer rich, legible states that communicate at thumbnail size.
+Reject empty, loading, login, placeholder, debug, or explanation-dependent
+screens.
 
-Ground the selection in the repository's product and market documents when they exist. Reject screens that need explanation, show empty states, or depend on text too small to read at store thumbnail size.
+Assess candidate captures as **Great**, **Usable**, or **Retake**. For every Retake,
+state the exact screen, seeded content, appearance, and status-bar state needed. Never
+hide a poor raw capture with decorative composition.
 
-Record for each screen: index, screen name, what it must show on screen, and the app state required to reach it.
+## 5. Write and confirm the English captions
 
-## 4. Write the English captions
+Write all three as two visible lines:
 
-English is the source locale for every caption. Write all three before showing anything to the user.
+- line 1 is the strongest hook and starts with an imperative action verb
+- line 2 completes the user payoff
+- target three words total; five is the hard maximum
+- use no terminal punctuation, ellipses, or marketing exclamation
+- express an outcome rather than a feature label
+- avoid repeating the same main verb or noun across the set
 
-Rules:
-
-- two lines per caption
-- the first line starts with an action verb in the imperative
-- three words total across both lines is the target, five is the hard maximum
-- no terminal punctuation, no ellipses, no marketing exclamation
-- each caption states a user outcome, not a feature name
-- the three captions do not repeat the same verb or the same noun
-- avoid words that break badly when the layout gets narrow
-
-Split the two lines where a person would naturally pause, not where the character count happens to be even.
-
-Store captions as an ordered object keyed by screenshot index, with the two lines as an array:
+Store them as:
 
 ```json
 {
@@ -75,54 +99,165 @@ Store captions as an ordered object keyed by screenshot index, with the two line
 }
 ```
 
-## 5. Get confirmation before translating
+Present the screen pairing and all three English captions together. Stop until the user
+approves them. Do not translate, configure capture for other locales, or design final
+compositions before approval.
 
-Stop and present the three English captions to the user with the screen each belongs to. Do not translate, do not write locale files, and do not start the capture setup for other locales until the user approves the English copy.
+## 6. Transcreate every locale
 
-Revise and re-present as many times as the user asks. Approval of the English set is the gate for the whole localized pipeline; once locales are generated, changing the English copy invalidates all of them.
+Translate the shared intent, never the English syntax:
 
-## 6. Transcreate into every locale
+- write native store-advertising language for the market
+- reuse established UI terminology
+- keep the message understandable in under one second
+- preserve natural phrase boundaries across two lines
+- let Korean, Japanese, Chinese, and Arabic use their native grammar and casing
+- use right-to-left direction for RTL copy
+- shorten the idea before shrinking text excessively
 
-Translate the intent, never the sentence. For each target locale, write the caption a native marketer in that market would write for the same screen.
+Keep identical JSON keys and array shapes across locales.
 
-- Keep the promise and the emotional register; discard the English word order.
-- Lead with whatever carries the message first in that language. In Korean the core keyword or noun leads and the verb closes the phrase, because a verb-first line reads as an abrupt command. Apply the same reasoning per language rather than copying this example.
-- The English rule "first line starts with a verb" is an English constraint. In other locales preserve the sense of action, not the part of speech.
-- Match the market's marketing idiom: register, formality level, and sentence ending conventions.
-- Reuse terminology already established in the app's own translations. The caption must use the same word for a feature as the UI does.
-- Count length in what the script renders, not in English words. CJK captions should stay short in characters; German and Romance locales usually need a longer second line, so keep the first line tighter.
-- Break the two lines at a phrase boundary valid in that language.
+## 7. Capture and verify the raw matrix
 
-Write one file per locale under `captions/`, with identical keys and array shape across all locales.
+Use `fastlane snapshot` through a dedicated UI test target:
 
-## 7. Set up capture
+- inject deterministic demo state with launch arguments
+- skip onboarding and prompts; disable permissions, review requests, and animation
+- navigate with accessibility identifiers, never localized labels
+- wait for stable elements rather than fixed sleeps
+- use clean, consistent status bars and appearance
+- verify one locale end to end before the full matrix
 
-Use `fastlane snapshot` driven by a dedicated UI test target. Keep the pipeline deterministic:
+Copy the results into `raw/<locale>/<device>/`. Verify the same indexed screen appears
+everywhere, the intended locale rendered, and no text is truncated. Recapture failures;
+never repair app UI by editing pixels.
 
-- Add or reuse a UI test target that only navigates and calls `snapshot(...)`. It must not assert product behavior.
-- Install `SnapshotHelper.swift` into that target and call `setupSnapshot(app)` before `app.launch()`.
-- Drive app state through launch arguments, not through tapping the real onboarding flow: skip onboarding, seed demo content, disable review prompts, freeze anything animated, and disable anything that needs a permission dialog.
-- Choose demo content that is meaningful in every locale and does not require translation, or seed it from the caption file's locale.
-- Address elements by accessibility identifier. Add identifiers to the app when they are missing; never match on localized text.
-- Wait for a stable element before each capture, never on a fixed sleep.
-- Configure `Snapfile` with the resolved devices, the locales from step 1, `clear_previous_screenshots`, and no HTML report.
+## 8. Gate the visual direction
 
-Verify one locale end to end before running the full matrix.
+Analyze the icon, app UI, theme tokens, target audience, domain, and approved positioning.
+Derive exactly three distinct design directions tailored to this app. Do not ask the
+user to choose a color in isolation.
 
-## 8. Capture and verify
+For each direction present:
 
-Run the full matrix, then move or copy the output into `design/screenshots/raw/<locale>/<device>/`.
+- direction name and one-sentence concept
+- background palette with exact hex values
+- background graphic or motif and why it belongs to this product
+- typography treatment
+- device framing and any real-UI breakout treatment
+- how it supports the three-screen story
+- main tradeoff or risk
 
-Check every locale before reporting done:
+Include one conservative, one expressive, and one strategically different option when
+the brand permits it. Recommend one with a concrete rationale. Stop and obtain one
+explicit user approval for the set-wide visual direction.
 
-- one file per screen per locale per device, with matching indices
-- the same screen appears under the same index everywhere
-- localized UI actually rendered in the target language, with no untranslated or truncated strings
-- no permission dialogs, debug overlays, placeholder content, or mid-animation frames
-- status bar is clean and consistent across the set
+Do not create or modify the `.pen` composition, render final variants, or export final
+screenshots before this approval. Once approved, record the decision in `direction.md`.
+Do not ask for another aesthetic choice unless the rendered result materially violates
+the approved direction or the user requests alternatives.
 
-Re-capture failures rather than editing pixels. Fix truncated UI in the app or in the seeded content, not in the screenshot.
+## 9. Prepare Pen
 
-## 9. Report
+Use the installed `pen` CLI, not ad hoc HTML/CSS compositing:
 
-Report the selected screens and why each earned its slot, the approved English captions, the locales translated with any wording that deserves a native check, the devices and locales captured, the output paths, and anything the compositing step needs to know, such as safe areas or captions that ran long in a specific locale.
+```sh
+command -v pen
+pen version
+pen status
+```
+
+If missing, report that `@pen.dev/cli` is required. If unauthenticated, ask the user to
+run `pen login`; do not expose or request tokens in chat.
+
+Prefer `pen interactive` because it exposes deterministic node operations, layout
+inspection, screenshots, and per-frame export. Start every interactive session with:
+
+```text
+get_editor_state({ include_schema: true })
+```
+
+Use `get_guidelines` when a compatible Pen design guide helps. Inspect existing `.pen`
+files with `batch_get` before modifying them. Save after meaningful changes.
+
+## 10. Build the editable composition
+
+Create or update `store-screenshots.pen` after the visual direction is approved:
+
+- create one exact-dimension top-level frame per locale, device, and screenshot
+- name frames `<locale>/<device>/NN-screen-name`
+- use shared variables and reusable components for palette, typography, device shell,
+  caption block, and recurring background motif
+- place the unmodified raw capture inside a precise device viewport
+- keep the device centered and high enough to feel dynamic; let its bottom bleed off
+  canvas when appropriate
+- keep copy in the upper area with generous horizontal safe margins
+- render line 1 as the dominant hook and line 2 as the supporting payoff
+- use locale-appropriate fonts, wrapping, casing, and direction
+- keep the approved background system cohesive across all three screens
+
+Prefer vector-native, editable background graphics. Use Pen image generation or stock
+imagery only when the approved direction genuinely calls for illustration or
+photography. Never add generic sparkles, random icons, or decoration unrelated to the
+product story.
+
+Optional breakout elements must come from a real, relevant UI panel in the raw capture.
+Keep their content, orientation, and visual language faithful to the app. Do not invent
+UI, rotate panels arbitrarily, or let breakouts obscure the headline or essential app
+content.
+
+Build and visually inspect the complete primary-locale set first. Use it as the style
+template for every remaining locale and device; change copy and raw screen content, not
+the approved design language.
+
+## 11. Inspect and export
+
+Use `snapshot_layout({ problemsOnly: true })` to catch clipping and overflow. Use
+`get_screenshot` sparingly on completed top-level frames to inspect visual fidelity at
+full size and thumbnail scale.
+
+Export each top-level frame separately with Pen `export_nodes`, PNG format, and a scale
+that produces the exact required pixel dimensions. Put only approved production files
+in `final/<locale>/<device>/`.
+
+Pen PNG exports include an alpha channel even when the top-level frame has a fully
+opaque background. After export, remove only the alpha channel with Xcode's
+`pngcrush`, writing to a temporary file before replacing the export:
+
+```sh
+tmp_png="$(mktemp).png"
+xcrun pngcrush -q -rem alla -reduce input.png "$tmp_png"
+mv "$tmp_png" input.png
+sips -g hasAlpha input.png
+```
+
+Require `hasAlpha: no` for every final PNG. This channel removal is an allowed
+technical normalization for store compatibility, not a visual correction. It must not
+resize, crop, stretch, repaint, or otherwise alter the rendered composition.
+
+Verify:
+
+- exact width, height, color mode, and PNG format
+- no alpha channel (`sips -g hasAlpha` reports `hasAlpha: no`)
+- one final image per index, locale, and device
+- no clipped, overlapping, untranslated, or unnaturally wrapped copy
+- legibility at store thumbnail size
+- consistent palette, motif, typography, device treatment, and spacing
+- raw UI remains accurate and undistorted
+- no watermark, debug layer, accidental Pen selection, or extra store chrome
+
+If dimensions or content are wrong, fix the top-level Pen frame and re-export. Do not
+stretch, crop, or repaint an incorrect export as a substitute.
+
+## 12. Report
+
+Report:
+
+- positioning brief and selected screen-to-value mapping
+- approved captions and visual direction
+- raw capture matrix
+- `.pen` source and `direction.md` paths
+- final output paths and exact dimensions
+- locales needing native review
+- Pen version and validation results
+- any intentionally omitted breakout or decorative treatment and why
