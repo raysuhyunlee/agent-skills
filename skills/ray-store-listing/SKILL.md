@@ -1,6 +1,6 @@
 ---
 name: ray-store-listing
-description: Create and localize ASO-backed App Store listing metadata from an approved shared positioning brief, with separate mandatory user approvals for app-name candidates and keyword portfolios before drafting the remaining metadata. Use when creating, refreshing, optimizing, or localizing an app name, subtitle, keywords, promotional text, description, or complete App Store listing.
+description: Create or localize ASO-backed App Store metadata from approved positioning, with separate mandatory approvals for app names and keyword portfolios. Use for app names, subtitles, keywords, promotional text, descriptions, or complete listing refreshes.
 ---
 
 # Store Listing
@@ -49,24 +49,8 @@ brief without calling out the conflict.
 
 ## 3. Build current ASO evidence
 
-Use Astro for Apple App Store name and keyword decisions:
-
-1. Use `list_apps` to identify whether the user's actual app is tracked.
-2. Match a published app by stable App Store ID before using product-specific data.
-3. Use `get_app_keywords` for its tracked keywords and native metrics.
-4. Use `search_app_store` to inspect search results and title patterns for each serious
-   candidate term in the target store.
-5. Use `search_rankings`, `get_keyword_suggestions`, and
-   `extract_competitors_keywords` when the required tracked state exists.
-
-For an unpublished app, never borrow metrics from an adjacent tracked app. To obtain
-native popularity and difficulty, create a dedicated temporary Astro app and add the
-serious candidate keywords after the user authorizes that persistent change. Before
-making it, state the proposed temporary app name, platform, stores, and exact keyword
-set. Then call `get_app_keywords` and use the returned popularity and difficulty in the
-name and keyword decisions. Continue with read-only Astro search, and label those
-metrics unavailable, only when the change is not authorized or Astro cannot track the
-requested market.
+Read [references/aso-evidence.md](references/aso-evidence.md) before using Astro or
+changing tracked state. Use current store evidence for name and keyword decisions.
 
 Keep every metric attached to its store, platform, locale, and collection date. Preserve
 Astro's native popularity and difficulty scales. Do not manufacture a combined score.

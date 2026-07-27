@@ -1,0 +1,4 @@
+interface:
+  display_name: "Manage Agent Skills"
+  short_description: "Create, audit, update, and install personal skills"
+  default_prompt: "Use $ray-manage-agent-skills to find my personal agent-skills repository and create, audit, or update its skills."

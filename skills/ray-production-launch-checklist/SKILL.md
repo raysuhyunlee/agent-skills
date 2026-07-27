@@ -1,6 +1,6 @@
 ---
 name: ray-production-launch-checklist
-description: Production release checklist workflow for apps, including launch-time AdMob SKAdNetwork ID sync. Use when Codex needs to prepare, review, expand, or walk through a checklist before an app's production deployment, launch, App Store or Play Store release, backend go-live, major update, or public availability milestone.
+description: Review and execute an app production-launch checklist, including AdMob SKAdNetwork ID sync. Use before App Store or Play Store release, backend go-live, a major update, or another public-availability milestone.
 ---
 
 # Production Launch Checklist
@@ -11,7 +11,8 @@ Use this skill to keep a living production-release checklist for an app. Add che
 
 ## Scripts
 
-Run bundled scripts in place with `uv run --script /Users/ray/.agents/skills/ray-production-launch-checklist/scripts/<script>.py ...`. Do not copy skill scripts into app repositories; pass `--project-root` or explicit file paths when a script needs project-local files.
+Run bundled scripts in place from this skill's `scripts/` directory. Do not copy them
+into app repositories; pass `--project-root` or explicit project-local paths.
 
 ## Workflow
 

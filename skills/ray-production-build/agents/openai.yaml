@@ -1,0 +1,4 @@
+interface:
+  display_name: "Production Build"
+  short_description: "앱 프로덕션 빌드 생성과 스토어 업로드 자동화"
+  default_prompt: "Use $ray-production-build to create, sign, validate, and upload a production build for this app."

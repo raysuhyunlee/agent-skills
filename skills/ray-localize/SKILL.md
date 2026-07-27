@@ -1,6 +1,6 @@
 ---
 name: ray-localize
-description: Localize application and project content for supported locales while preserving meaning, tone, file structure, placeholders, and locale-specific conventions. Use when the user asks to localize, translate, or update translations for UI strings, settings, paywalls, screenshots, store metadata, documentation, or another defined content scope.
+description: Localize project content while preserving meaning, tone, structure, placeholders, terminology, and locale conventions. Use for UI strings, settings, paywalls, screenshots, store metadata, documentation, or translation updates.
 ---
 
 # Localize

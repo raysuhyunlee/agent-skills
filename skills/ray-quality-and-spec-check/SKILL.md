@@ -1,6 +1,6 @@
 ---
 name: ray-quality-and-spec-check
-description: Review code, configuration, or a change set for project-specification compliance and evidence-backed code quality issues. Use for quality checks, spec checks, compliance checks, code reviews, PR reviews, or questions such as "does this follow the spec?".
+description: Review code, configuration, or a change set for specification compliance and evidence-backed quality issues. Use for code, PR, quality, compliance, or “does this follow the spec?” reviews.
 ---
 
 # Quality and Spec Check

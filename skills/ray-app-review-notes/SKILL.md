@@ -1,6 +1,6 @@
 ---
 name: ray-app-review-notes
-description: Inspect an app project and prepare concise, reviewer-friendly App Store Connect review notes plus a physical-device demo recording plan for an initial App Store submission. Use when Codex needs to explain an app to App Review, identify missing submission evidence, draft the App Review Information Notes field, or plan a review video covering core flows, accounts, purchases, user-generated content controls, permissions, regional behavior, external services, and regulated or licensed material.
+description: Prepare evidence-backed App Store review notes and a physical-device demo plan from an app project. Use for initial-submission review information, missing-evidence checks, reviewer access instructions, or recording plans covering core and review-sensitive flows.
 ---
 
 # App Review Notes
@@ -85,55 +85,9 @@ unrelated device content from the recording.
 Write the paste-ready draft in English unless the user requests another language. Use
 plain text that survives pasting into App Store Connect.
 
-Follow these writing rules:
-
-- use concise, complete sentences
-- address the reviewer politely and directly
-- use short numbered headings in the same order as the seven submission areas
-- lead with facts and exact navigation paths
-- identify non-applicable items explicitly
-- use exact device names, OS versions, service names, and regional conditions only when
-  verified
-- do not use an em dash or a middle dot
-- avoid fragments, promotional hype, vague claims, and internal engineering jargon
-- do not claim that the app was fully tested merely because tests or build settings
-  exist
-
-Search the completed draft for `—` and `·` and remove every occurrence. Check the
-current Notes field limit through available App Store Connect tooling or current
-official Apple documentation. Validate the encoded UTF-8 byte count, not only the
-visible character count. If the limit cannot be verified, keep the draft under 4,000
-UTF-8 bytes as a conservative target and disclose that assumption outside the
-paste-ready text.
-
-Use this content order:
-
-```text
-Thank you for reviewing [App Name].
-
-1. Demo Recording
-[Accessible recording URL and any essential access instruction.]
-
-2. Tested Devices
-[Verified physical device models and exact operating system versions.]
-
-3. Purpose and Audience
-[Purpose, target audience, problem, and value.]
-
-4. Setup and Feature Access
-[Numbered navigation in concise sentences. Refer to dedicated login fields when used.]
-
-5. External Services
-[Service name and its role. State "None" only when verified.]
-
-6. Regional Availability
-[Differences by region, or a verified consistency statement.]
-
-7. Authorization
-[Relevant documentation and access instructions, or a concise not-applicable statement.]
-```
-
-Adapt the wording to the app. Do not leave bracketed placeholders in a final submission.
+Read [references/review-package.md](references/review-package.md) for the output contract,
+writing rubric, and length validation. Adapt the structure to the app without weakening
+evidence boundaries. Do not leave placeholders in a final submission.
 
 ## 5. Create the physical-device recording plan
 

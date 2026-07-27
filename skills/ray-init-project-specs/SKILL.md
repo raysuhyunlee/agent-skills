@@ -1,6 +1,6 @@
 ---
 name: ray-init-project-specs
-description: Initialize or repair a project's source-of-truth specification system, including root AGENTS.md instructions, a README.md spec index, spec/overview.md, and concise domain documents. Use when starting project documentation, adding a spec-driven agent contract, bootstrapping specs for an existing codebase, or asking to set up AGENTS.md and project specs.
+description: Initialize or repair a project's source-of-truth specifications, including AGENTS.md, a README index, overview, and domain specs. Use when bootstrapping project documentation, adding a spec-driven agent contract, or repairing an incomplete spec system.
 ---
 
 # Initialize Project Specs

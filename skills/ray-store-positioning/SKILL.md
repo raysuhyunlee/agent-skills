@@ -1,6 +1,6 @@
 ---
 name: ray-store-positioning
-description: Derive, confirm, and maintain a shared app-store positioning brief from product specifications, market research, competitor evidence, and user needs. Use when store listings and screenshots need a common set of core values, when creating multiple store-marketing assets together, when positioning is missing or stale, or when product, audience, pricing, or differentiation has materially changed.
+description: Derive and maintain an approved app-store positioning brief from product and market evidence. Use when listings and screenshots need shared values, positioning is missing or stale, or the product, audience, pricing, business model, or differentiation changed.
 ---
 
 # Store Positioning
@@ -88,64 +88,9 @@ If only one direction is credible, still present it for explicit confirmation.
 
 ## 5. Write the approved brief
 
-Use this contract so downstream skills can consume the file without re-deriving the
-strategy:
-
-```markdown
----
-status: approved
-approved_at: YYYY-MM-DD
-primary_market: en-US
----
-
-# Store Positioning
-
-## Product snapshot
-- Product:
-- Shipping platforms:
-- Business model:
-- Supported locales:
-
-## Target customer
-- Primary segment:
-- Trigger:
-- Job to be done:
-- Desired outcome:
-- Alternatives:
-
-## Positioning statement
-[For audience, this product creates outcome through differentiation.]
-
-## Message hierarchy
-### 1. Primary value
-- Outcome:
-- Proof:
-- Evidence:
-
-### 2. Differentiating value
-- Outcome:
-- Proof:
-- Evidence:
-
-### 3. Proof value
-- Outcome:
-- Proof:
-- Evidence:
-
-## Vocabulary
-- Prefer:
-- Avoid:
-
-## Claim boundaries
-- Supported claims:
-- Unsupported or risky claims:
-
-## Sources
-- [repository paths, store evidence, and collection dates]
-```
-
-Keep source paths repository-relative. Preserve unresolved unknowns instead of filling
-them with marketing assumptions.
+Use [references/brief-contract.md](references/brief-contract.md) so downstream skills can
+consume the approved strategy without re-deriving it. Keep source paths
+repository-relative and preserve unresolved unknowns.
 
 ## 6. Hand off
 
