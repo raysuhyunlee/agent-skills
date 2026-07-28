@@ -4,6 +4,7 @@ set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source_dir="$repo_root/skills"
+instructions_source="$repo_root/instructions/AGENTS.md"
 mode="install"
 dry_run=false
 
@@ -53,6 +54,11 @@ if [ ! -d "$source_dir" ]; then
   exit 1
 fi
 
+if [ ! -f "$instructions_source" ]; then
+  echo "Missing global instructions: $instructions_source" >&2
+  exit 1
+fi
+
 # Fail before creating any link when a target is owned by another source.
 if [ "$mode" = "install" ]; then
   for target_dir in "${target_dirs[@]}"; do
@@ -71,6 +77,19 @@ if [ "$mode" = "install" ]; then
 
     run mkdir -p "$target_dir"
   done
+
+  instruction_targets=("$HOME/.codex/AGENTS.md" "$HOME/.claude/CLAUDE.md")
+  for target in "${instruction_targets[@]}"; do
+    if [ -L "$target" ] && [ "$(readlink "$target")" = "$instructions_source" ]; then
+      continue
+    fi
+    if [ -e "$target" ] || [ -L "$target" ]; then
+      echo "Refusing to replace existing target: $target" >&2
+      exit 1
+    fi
+  done
+
+  run mkdir -p "$HOME/.codex" "$HOME/.claude"
 fi
 
 found=false
@@ -115,3 +134,32 @@ if ! $found; then
   echo "No skills found in $source_dir" >&2
   exit 1
 fi
+
+instruction_targets=("$HOME/.codex/AGENTS.md" "$HOME/.claude/CLAUDE.md")
+for target in "${instruction_targets[@]}"; do
+  target_dir="$(dirname "$target")"
+  target_name="$(basename "$target")"
+
+  if [ "$mode" = "unlink" ]; then
+    if [ -L "$target" ] && [ "$(readlink "$target")" = "$instructions_source" ]; then
+      run rm "$target"
+      if ! $dry_run; then
+        echo "Unlinked global instructions -> $target"
+      fi
+    elif [ -e "$target" ] || [ -L "$target" ]; then
+      echo "Skipped $target_name in $target_dir: target is not managed by this repository" >&2
+    else
+      echo "Skipped $target_name in $target_dir: not installed"
+    fi
+  elif [ -L "$target" ] && [ "$(readlink "$target")" = "$instructions_source" ]; then
+    echo "Up to date: global instructions -> $target"
+  elif [ -e "$target" ] || [ -L "$target" ]; then
+    echo "Refusing to replace existing target: $target" >&2
+    exit 1
+  else
+    run ln -s "$instructions_source" "$target"
+    if ! $dry_run; then
+      echo "Linked global instructions -> $target"
+    fi
+  fi
+done

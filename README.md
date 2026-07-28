@@ -1,6 +1,11 @@
 # Agent Skills
 
-Personal agent skills managed as source files and installed with individual symlinks.
+Personal agent skills and global instructions managed as source files and installed
+with individual symlinks.
+
+## Global Instructions
+
+- `instructions/AGENTS.md`: shared communication guidance for Codex and Claude Code
 
 ## Skills
 
@@ -22,13 +27,20 @@ Personal agent skills managed as source files and installed with individual syml
 ./install.sh
 ```
 
-The default targets are `$HOME/.agents/skills` (Codex) and `$HOME/.claude/skills` (Claude Code), so every skill is available to both tools. Override them with a single directory using `AGENT_SKILLS_DIR`:
+The default skill targets are `$HOME/.agents/skills` (Codex) and
+`$HOME/.claude/skills` (Claude Code), so every skill is available to both tools.
+The global instructions are linked to `$HOME/.codex/AGENTS.md` and
+`$HOME/.claude/CLAUDE.md`.
+
+Override the skill targets with a single directory using `AGENT_SKILLS_DIR`:
 
 ```sh
 AGENT_SKILLS_DIR="$HOME/custom-agent-skills" ./install.sh
 ```
 
-The installer creates one symlink per skill per target. It never replaces existing files, directories, or links owned by another source.
+The installer creates one symlink per skill per target and one link per global
+instruction target. It never replaces existing files, directories, or links owned by
+another source.
 
 ## Commands
 
