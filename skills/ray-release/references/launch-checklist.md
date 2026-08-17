@@ -1,8 +1,3 @@
----
-name: ray-production-launch-checklist
-description: Review and execute an app production-launch checklist, including AdMob SKAdNetwork ID sync. Use before App Store or Play Store release, backend go-live, a major update, or another public-availability milestone.
----
-
 # Production Launch Checklist
 
 ## Overview
@@ -29,7 +24,7 @@ into app repositories; pass `--project-root` or explicit project-local paths.
 - If Firebase Analytics or Crashlytics are integrated, verify they are disabled in debug builds and enabled only for release/production builds.
 - Use `scripts/format_info_plist.py --project-root <app-root>` when an iOS `Info.plist` needs deterministic sorted plistlib formatting.
 - If the app supports only one language, set `CFBundleDevelopmentRegion` in the app's `Info.plist` to that locale, for example `ko-KR` for Korean.
-- If the app is multilingual and has in-app purchases or subscriptions, verify IAP/subscription localizations are complete and natural for every supported locale. Use `app-store-ops` for repeatable IAP/subscription store-data operations.
+- If the app is multilingual and has in-app purchases or subscriptions, verify IAP/subscription localizations are complete and natural for every supported locale. Use `asc-subscription-localization` or `gplay-iap-setup` for repeatable store-data operations.
 - Check the app's U.S. export compliance/encryption setting, including `ITSAppUsesNonExemptEncryption` in the app's `Info.plist` when applicable.
 - If Android is supported, verify the app's `android/key.properties` is configured to use `/Users/ray/Documents/upload-keystore.jks` as the release keystore.
 - If Android is supported and the app is multilingual, enable Android per-app language settings by setting `androidResources { generateLocaleConfig = true }` in `android/app/build.gradle.kts` and adding `android/app/src/main/res/resources.properties` with `unqualifiedResLocale=<default-locale>`, for example `unqualifiedResLocale=en`; verify a build generates `_generated_res_locale_config.xml`.

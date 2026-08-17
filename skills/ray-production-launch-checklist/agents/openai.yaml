@@ -1,4 +1,0 @@
-interface:
-  display_name: "Production Launch Checklist"
-  short_description: "Production checklist and SKAdNetwork sync"
-  default_prompt: "Use $ray-production-launch-checklist to prepare the production release checklist for this app."

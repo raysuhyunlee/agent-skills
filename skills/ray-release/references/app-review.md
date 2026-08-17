@@ -1,8 +1,3 @@
----
-name: ray-app-review-notes
-description: Prepare evidence-backed App Store review notes and a physical-device demo plan from an app project. Use for initial-submission review information, missing-evidence checks, reviewer access instructions, or recording plans covering core and review-sensitive flows.
----
-
 # App Review Notes
 
 Prepare an evidence-backed App Review package from the shipping project. Produce a
@@ -85,7 +80,7 @@ unrelated device content from the recording.
 Write the paste-ready draft in English unless the user requests another language. Use
 plain text that survives pasting into App Store Connect.
 
-Read [references/review-package.md](references/review-package.md) for the output contract,
+Read [review-package.md](review-package.md) for the output contract,
 writing rubric, and length validation. Adapt the structure to the app without weakening
 evidence boundaries. Do not leave placeholders in a final submission.
 

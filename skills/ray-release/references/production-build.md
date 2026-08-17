@@ -1,8 +1,3 @@
----
-name: ray-production-build
-description: Create, sign, validate, upload, or troubleshoot production builds for App Store Connect or Google Play. Use for store archives and exports, new bundle IDs, provisioning failures, or production-build delivery.
----
-
 # Production Build
 
 ## Scope

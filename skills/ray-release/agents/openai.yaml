@@ -1,0 +1,4 @@
+interface:
+  display_name: "Release"
+  short_description: "Build, submit, and monitor app store releases"
+  default_prompt: "Use $ray-release to prepare, build, upload, submit, and monitor this app release."
